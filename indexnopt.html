@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>week 4 workshop</title>
+</head>
+
+
+<style>
+
+    li{
+        height: 100px;
+    }
+
+
+</style>
+
+<body>
+    
+
+<ul>
+    <li>thing</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+
+<script>
+let myNumber = 10;
+let adder = 5;
+
+const numberArray = [1,3,5,9,31,6,4];
+let newItem = document.createElement('li');
+
+//const myList = document.body.children[0];
+const myList = document.body.querySelector('ul');
+
+console.log(myList);
+const items = myList.children;
+myList.appendChild(newItem);
+console.log(items);
+
+let myListItems = Array.from(items);
+
+
+
+myListItems.push(newItem);
+
+
+
+
+for(let i = 0; i < myListItems.length; i++){
+    let randomColor = getRandomColor();
+    items[i].style.backgroundColor = randomColor;
+    items[i].style.width = "200px";
+    items[i].style.height = "40px";
+}
+
+function getRandomColor(){
+    return `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`
+}
+
+
+// for(let i = 0; i < numberArray.length; i++){
+//     let incrementNumber = myNumber + i;
+//     console.log(addNumber(adder, numberArray[i]));
+//     // myNumber + i;
+// }
+
+
+// function(){
+//     let myVariable
+// }
+
+let counter = 0;
+
+
+// addOneAndLog();
+
+
+// setInterval(addOneAndLog, 1000);
+
+
+
+function addOneAndLog(){
+    counter++
+    console.log(counter);
+}
+
+
+
+
+function logSwitch(val){
+
+    switch(val){
+
+        case 1: 
+            console.log('one');
+            break;
+        default:
+            console.log('nope')        
+    }
+}
+
+
+
+
+function addNumber(adder, number){
+    const anArray = [];
+    console.log("i'm inside the function:" +number);
+    return adder + number
+}
+
+
+</script>
+
+
+</body>
+</html>

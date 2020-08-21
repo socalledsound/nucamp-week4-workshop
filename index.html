@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>little game</title>
+
+    <style>
+
+        button {
+            width: 200px;
+            height: 150px;
+            padding: 12px;
+            font-size: 40px;
+            background-color: coral;
+            color: white;
+        }
+
+        img {
+            position: absolute;
+        }
+
+        div {
+                position: absolute;
+                width: 50vw;
+                /* width: 30px; */
+                height: 500px;
+        }
+
+        #leftSide {
+            /* background-image: linear-gradient(to right,  rgba(171, 171, 214, 0.6),  rgba(71, 171, 214, 0.6)); */
+            background-color: rgba(71, 171, 214, 0.6);
+       
+        }
+
+        #rightSide{
+            background-Color: rgb(211, 184, 184);
+            left: 50vw;
+            /* left: 30px; */
+            border-left: 10px solid black;
+            /* left:50px; */
+            
+        }
+
+
+    </style>
+
+
+
+</head>
+<body>
+    <h1>whatevs</h1>
+    <button onClick="runGame()">start game</button>
+    <p>find the extra smiling face and click on it</p>
+
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+
+
+<script>
+let numberOfFaces = 5;
+const theLeftSide = document.querySelector('#leftSide');
+console.log(theLeftSide);
+
+
+generateFaces();
+
+
+function generateFaces(){
+
+    for(let i = 0; i < numberOfFaces; i++){
+        let face = document.createElement('img');
+        face.src="imgs/smile.png";
+        let randomTop = Math.floor(Math.random() * 400 + 1);
+        let randomLeft = Math.floor(Math.random() * 400 + 1);
+        face.style.top = randomTop + 'px';
+        face.style.left = randomLeft + 'px';
+        theLeftSide.appendChild(face);
+
+    }
+
+
+}
+
+
+
+function runGame(){
+
+}
+
+
+</script>
+
+
+</body>
+</html>
