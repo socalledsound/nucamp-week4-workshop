@@ -48,9 +48,9 @@
 
 
 </head>
-<body>
+<body onLoad="generateFaces()">
     <h1>whatevs</h1>
-    <button onClick="runGame()">start game</button>
+    <!-- <button onClick="generateFaces()">start game</button> -->
     <p>find the extra smiling face and click on it</p>
 
     <div id="leftSide"></div>
@@ -59,34 +59,60 @@
 
 <script>
 let numberOfFaces = 5;
+const theBody = document.body;
 const theLeftSide = document.querySelector('#leftSide');
+const theRightSide = document.querySelector('#rightSide');
+let score = 0;
 console.log(theLeftSide);
-
-
-generateFaces();
 
 
 function generateFaces(){
 
     for(let i = 0; i < numberOfFaces; i++){
         let face = document.createElement('img');
-        face.src="imgs/smile.png";
+        face.src="smile.png";
+        //let face = document.createElement('div');
+        // face.style.width = "50px";
+        // face.style.height = "50px";
+        // face.style.borderRadius="90px";
+        // face.style.backgroundColor="yellow";
         let randomTop = Math.floor(Math.random() * 400 + 1);
         let randomLeft = Math.floor(Math.random() * 400 + 1);
         face.style.top = randomTop + 'px';
         face.style.left = randomLeft + 'px';
         theLeftSide.appendChild(face);
 
+        const leftSideImages = theLeftSide.cloneNode(true);
+        // console.log(leftSideImages);
+        leftSideImages.removeChild(leftSideImages.lastChild);
+        theRightSide.appendChild(leftSideImages);
     }
 
+        console.log(theLeftSide.lastChild);
+        theLeftSide.lastChild.onclick = function nextLevel(event) {
+                 console.log("hi");
+                event.stopPropagation();
+                while (theLeftSide.firstChild) {
+                    theLeftSide.removeChild(theLeftSide.firstChild);
+                }
+                while (theRightSide.firstChild) {
+                    theRightSide.removeChild(theRightSide.firstChild);
+                }
+                numberOfFaces += 5;
+                score++
+                 generateFaces();
+};
+            theBody.onclick = function gameOver() {
+                alert("sorry - you clicked in the wrooooong place.  But you got it right " + score + " times.  refresh browser to try again");
+                theBody.onclick = null;
+                theLeftSide.lastChild.onclick = null;
+            }
 
 }
 
 
 
-function runGame(){
 
-}
 
 
 </script>
