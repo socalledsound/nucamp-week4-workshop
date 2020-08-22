@@ -58,38 +58,64 @@
 
 
 <script>
+    //number of faces to start with
 let numberOfFaces = 5;
+//create a reference to the body
 const theBody = document.body;
+//store the left and right side divs in javascript constants
 const theLeftSide = document.querySelector('#leftSide');
 const theRightSide = document.querySelector('#rightSide');
+//initialize score variable to zero
 let score = 0;
+//let's just check and make sure this is a div in the console
 console.log(theLeftSide);
 
-
+///this is the function that our start game button calls
 function generateFaces(){
 
+// a for loop that iterates from 0 to the number of faces we declared above
+//that number will get bigger each time the player wins
     for(let i = 0; i < numberOfFaces; i++){
+        //make an image element
         let face = document.createElement('img');
+        //set the source to our image path
         face.src="smile.png";
-        //let face = document.createElement('div');
-        // face.style.width = "50px";
-        // face.style.height = "50px";
-        // face.style.borderRadius="90px";
-        // face.style.backgroundColor="yellow";
+        //set a random location on the y axis
         let randomTop = Math.floor(Math.random() * 400 + 1);
+        //set a randomlocation on the x axis
         let randomLeft = Math.floor(Math.random() * 400 + 1);
+
+        //apply the position to the <img src="smile.png" /> tag
         face.style.top = randomTop + 'px';
         face.style.left = randomLeft + 'px';
+        //add the image element to the DOM
         theLeftSide.appendChild(face);
 
+        //make a copy of the left side images
         const leftSideImages = theLeftSide.cloneNode(true);
         // console.log(leftSideImages);
+        //remove one of the images
         leftSideImages.removeChild(leftSideImages.lastChild);
+        //append the new left side with one less image to the right side
         theRightSide.appendChild(leftSideImages);
     }
 
-        console.log(theLeftSide.lastChild);
-        theLeftSide.lastChild.onclick = function nextLevel(event) {
+        //now there's two different ways to add the event listeners.
+        //here's one:
+        //theLeftSide.lastChild.onclick = () => nextLevel(event);
+        //theBody.onclick = () => gameOver();
+
+
+         theLeftSide.lastChild.addEventListener('click', ()=> nextLevel(event));
+         theBody.addEventListener('click', () => gameOver()); 
+
+}
+
+
+//here's our function declarations, I think the code looks nicer with them down here.
+//but, if we do declare them down here we have to wrap them in functions in the event listener,
+//which is what I did above using the arrow syntax.
+function nextLevel(event) {
                  console.log("hi");
                 event.stopPropagation();
                 while (theLeftSide.firstChild) {
@@ -102,16 +128,12 @@ function generateFaces(){
                 score++
                  generateFaces();
 };
-            theBody.onclick = function gameOver() {
+
+function gameOver() {
                 alert("sorry - you clicked in the wrooooong place.  But you got it right " + score + " times.  refresh browser to try again");
                 theBody.onclick = null;
                 theLeftSide.lastChild.onclick = null;
             }
-
-}
-
-
-
 
 
 
